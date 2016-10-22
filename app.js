@@ -15,8 +15,10 @@ mongoose.connect('mongodb://localhost/odla');
 var db = mongoose.connection;
 
 
-var routes = require('./routes/index');
-var users  = require('./routes/users');
+var routes             = require('./routes/index');
+var users              = require('./routes/users');
+var moonwalk           = require('./routes/moonwalk');
+var audioGenerationAPI = require('./routes/api/audioGenerationAPI');
 
 // Init App
 var app = express();
@@ -79,6 +81,8 @@ app.use(function(req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/moonwalk', moonwalk);
+app.use('/api/audioGenerationAPI', audioGenerationAPI);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

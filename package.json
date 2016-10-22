@@ -22,6 +22,8 @@
     "mongoose": "*",
     "passport": "*",
     "passport-http": "*",
-    "passport-local": "*"
+    "passport-local": "*",
+    "url": "^0.11.0",
+    "watson-developer-cloud": "^2.6.2"
   }
 }
