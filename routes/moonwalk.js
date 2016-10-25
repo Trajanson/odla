@@ -1,10 +1,23 @@
 var express = require('express');
 var router  = express.Router();
 
+var Moonwalk = require('../models/moonwalk');
+
 // Get Homepage
 router.get('/', ensureAuthenticated, function(req, res) {
-  res.render('dailyMoonwalk');
+  let current_user = req.user;
+
+  Moonwalk.generateDraftMoonwalk(current_user, function(draftMoonwalk, stockPersonPhotoPath) {
+    res.render('dailyMoonwalk', {draftMoonwalk: draftMoonwalk,
+                                 stockPersonPhotoPath: stockPersonPhotoPath}
+    );
+  });
+
+
 });
+
+
+
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

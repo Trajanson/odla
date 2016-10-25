@@ -8,10 +8,12 @@ var flash            = require('connect-flash');
 var session          = require('express-session');
 var passport         = require('passport');
 var LocalStrategy    = require('passport-local').Strategy;
+
+var DatabaseConfiguration = require('./config/database_configuration');
 var mongo            = require('mongodb');
 var mongoose         = require('mongoose');
 
-mongoose.connect('mongodb://localhost/odla');
+mongoose.connect(DatabaseConfiguration.PATH);
 var db = mongoose.connection;
 
 
@@ -19,6 +21,7 @@ var routes             = require('./routes/index');
 var users              = require('./routes/users');
 var moonwalk           = require('./routes/moonwalk');
 var audioGenerationAPI = require('./routes/api/audioGenerationAPI');
+var moonwalkAPI = require('./routes/api/moonwalkAPI');
 
 // Init App
 var app = express();
@@ -83,6 +86,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/moonwalk', moonwalk);
 app.use('/api/audioGenerationAPI', audioGenerationAPI);
+app.use('/api/moonwalk', moonwalkAPI);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

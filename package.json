@@ -4,13 +4,15 @@
   "description": "Flashcard Learning Application",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seedDB": "node ./db/seed.js",
+    "dev": "nodemon app.js"
   },
   "author": "Julian Theoderik Trajanson",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "*",
-    "body-parser": "*",
+    "body-parser": "^1.15.2",
     "connect-flash": "*",
     "cookie-parser": "^1.4.1",
     "express": "*",
@@ -20,10 +22,14 @@
     "express-validator": "*",
     "mongodb": "*",
     "mongoose": "*",
+    "mongoose-random": "^0.1.1",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
     "url": "^0.11.0",
     "watson-developer-cloud": "^2.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

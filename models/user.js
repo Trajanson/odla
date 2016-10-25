@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
 
-// User Schema
 var UserSchema = mongoose.Schema({
 	username: {
 		type:  String,
@@ -28,7 +27,7 @@ module.exports.createUser = function(newUser, callback){
 	        newUser.save(callback);
 	    });
 	});
-}
+};
 
 module.exports.getUserByUsername = function(username, callback) {
   var query = { username: username};

@@ -1,4 +1,42 @@
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script> -->
+
+<link rel="stylesheet" href="/css/moonwalkingFlashcard.css" />
 
 
-This is a test.
+<script>
+  let draftMoonwalk = {
+    stockPerson: "{{draftMoonwalk.stockPerson}}",
+    user:        "{{draftMoonwalk.user}}",
+    created_at:  "{{draftMoonwalk.created_at}}",
+    completed:   "{{draftMoonwalk.completed}}",
+    personStatement: "{{draftMoonwalk.personStatement}}",
+    voice: "{{draftMoonwalk.voice}}"
+  };
+  let stockPersonPhotoPath = "{{stockPersonPhotoPath}}";
+  let personStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${draftMoonwalk.personStatement}&voice=${draftMoonwalk.voice}`);
+  personStatementAudio.play();
+</script>
+<script src="/js/dailyMoonwalk.js" defer="defer"></script>
+
+<div id="flashcard" class="flashcard-container flip-container">
+    <div class="flipper">
+
+      <div class="front-of-flashcard">
+
+        <div class="front-flashcard-text flashcard-text"><span id="known-word">Test: {{draftMoonwalk.personStatement}}</span></div>
+
+        <div id="image-container" >
+          <img id="stockPersonImage" />
+        </div>
+
+        <img class="flashcard-audio-image" src="/images/audioPurple.png" />
+
+        <button id="flip-button">Got it!</button>
+
+      </div>
+
+      <div class="back-of-flashcard">
+      </div>
+
+    </div>
+  </div>

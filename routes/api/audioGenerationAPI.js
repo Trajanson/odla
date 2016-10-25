@@ -17,7 +17,7 @@ router.get('/', ensureAuthenticated, function(req, res) {
 
   var params = {
     text: query.text,
-    voice: 'en-US_AllisonVoice', // Optional voice
+    voice: query.voice,
     accept: 'audio/wav'
   };
 
