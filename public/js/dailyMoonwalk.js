@@ -238,7 +238,6 @@ function handleFlipButtonClick() {
   FLASHCARD.toggleClass('clicked');
 
   console.log(draftMoonwalk);
-
   draftMoonwalk.created_at = Date.now();
   $.ajax({
     type: "POST",

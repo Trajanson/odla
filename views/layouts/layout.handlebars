@@ -46,6 +46,28 @@
                 {{#if user}}
                   <li><a href="/">Dashboard</a></li>
                   <li><a href="/moonwalk">Daily Moonwalk</a></li>
+
+                  {{#if moonwalksInProgress.length}}
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moonwalks In Progress<span class="caret"></span></a>
+                      <ul class="dropdown-menu moonwalk-list">
+                        <li>Test Your Memory</li>
+                        <li role="separator" class="divider"></li>
+
+                        {{#each moonwalksInProgress}}
+                        <li class="moonwalk-list-element">
+                          <a href="/moonwalk/test?moonwalk={{_id}}">
+                            <div class="moonwalk-list-badge-container">
+                              <img class="moonwalk-list-badge" src="{{imageURL}}" />
+                            </div>
+                            <div class="moonwalk-list-text">{{stockPersonFirstName}}</div>
+                          </a>
+                        </li>
+                        {{/each}}
+                      </ul>
+                    </li>
+                  {{/if}}
+
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{user.name}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">

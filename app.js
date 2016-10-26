@@ -16,8 +16,10 @@ var mongoose         = require('mongoose');
 mongoose.connect(DatabaseConfiguration.PATH);
 var db = mongoose.connection;
 
+var Moonwalk = require('./models/moonwalk');
 
-var routes             = require('./routes/index');
+
+var dashboard          = require('./routes/dashboard');
 var users              = require('./routes/users');
 var moonwalk           = require('./routes/moonwalk');
 var audioGenerationAPI = require('./routes/api/audioGenerationAPI');
@@ -75,14 +77,39 @@ app.use(flash());
 
 // Global Variables
 app.use(function(req, res, next) {
+  let successfulFetchMoonwalksInProgressCallback = function (err, moonwalksInProgress) {
+    res.locals.moonwalksInProgress = moonwalksInProgress;
+    next();
+  }
+  
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg   = req.flash('error_msg');
   res.locals.error       = req.flash('error');
   res.locals.user        = req.user || null;
-  next();
+  if (req.user) {
+    Moonwalk.find({ user: req.user._id, completed: false },
+                  successfulFetchMoonwalksInProgressCallback);
+  } else {
+    next();
+  }
 });
 
-app.use('/', routes);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.use('/', dashboard);
 app.use('/users', users);
 app.use('/moonwalk', moonwalk);
 app.use('/api/audioGenerationAPI', audioGenerationAPI);

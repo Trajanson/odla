@@ -3,6 +3,8 @@ var StockPerson = require('./stockPerson.js');
 
 var moonwalkSchema = mongoose.Schema({
   stockPerson: {type: mongoose.Schema.Types.ObjectId, ref: 'StockPerson'},
+  imageURL: {type: String},
+  stockPersonFirstName: {type: String},
   phoneNumber:     {type: String},
   personStatement: {type: String},
   user:        {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
@@ -26,6 +28,8 @@ module.exports.generateDraftMoonwalk = function(currentUser, callback) {
           statement         = generateStatement(randomPhoneNumber);
       let draftMoonwalk = new Moonwalk({
         stockPerson: randomStockPerson._id,
+        stockPersonFirstName: randomStockPerson.firstName,
+        imageURL: randomStockPerson.photoPath,
         phoneNumber: randomPhoneNumber,
         personStatement: statement,
         voice: voice,

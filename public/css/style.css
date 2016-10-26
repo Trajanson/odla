@@ -32,3 +32,45 @@ body {
   margin-top: 25px;
   border-bottom: 1px solid #eee;
 }
+
+.moonwalk-list-badge-container{
+  max-height: 60px;
+  max-width: 60px;
+  line-height: 60px;
+  text-align: center;
+  background-color: #e8e8e8;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: -11%;
+}
+
+.moonwalk-list-badge{
+  vertical-align: middle;
+  max-height: 60px;
+  max-width: 60px;
+}
+
+.moonwalk-list {
+  min-width: 185px;
+}
+
+.moonwalk-list-element {
+  border-bottom: 1px solid black;
+  margin-top: 10px;
+}
+
+.moonwalk-list-element:first-child {
+  margin-top: 0px;
+}
+
+
+.moonwalk-list-element:last-child {
+  border-bottom: 0px;
+}
+
+.moonwalk-list-text{
+  position: relative;
+  top: -55px;
+  left: 78px;
+}

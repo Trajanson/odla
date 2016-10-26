@@ -10,7 +10,9 @@
     created_at:  "{{draftMoonwalk.created_at}}",
     completed:   "{{draftMoonwalk.completed}}",
     personStatement: "{{draftMoonwalk.personStatement}}",
-    voice: "{{draftMoonwalk.voice}}"
+    voice: "{{draftMoonwalk.voice}}",
+    imageURL: "{{draftMoonwalk.imageURL}}",
+    stockPersonFirstName: "{{draftMoonwalk.stockPersonFirstName}}"
   };
   let stockPersonPhotoPath = "{{stockPersonPhotoPath}}";
   let personStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${draftMoonwalk.personStatement}&voice=${draftMoonwalk.voice}`);
