@@ -7,9 +7,10 @@ var Moonwalk = require('../models/moonwalk');
 router.get('/', ensureAuthenticated, function(req, res) {
   let current_user = req.user;
 
-  Moonwalk.generateDraftMoonwalk(current_user, function(draftMoonwalk, stockPersonPhotoPath) {
+  Moonwalk.generateDraftMoonwalk(current_user, function(draftMoonwalk, stockPersonPhotoPath, stockPersonFirstName) {
     res.render('dailyMoonwalk', {draftMoonwalk: draftMoonwalk,
-                                 stockPersonPhotoPath: stockPersonPhotoPath}
+                                 stockPersonPhotoPath: stockPersonPhotoPath,
+                                 stockPersonFirstName: stockPersonFirstName}
     );
   });
 

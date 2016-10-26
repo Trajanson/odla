@@ -14,6 +14,7 @@
   };
   let stockPersonPhotoPath = "{{stockPersonPhotoPath}}";
   let personStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${draftMoonwalk.personStatement}&voice=${draftMoonwalk.voice}`);
+  let stockPersonFirstName = "{{stockPersonFirstName}}";
   personStatementAudio.play();
 </script>
 <script src="/js/dailyMoonwalk.js" defer="defer"></script>
@@ -36,6 +37,7 @@
       </div>
 
       <div class="back-of-flashcard">
+        <div id="moonwalk-time-elapsed"></div>
       </div>
 
     </div>

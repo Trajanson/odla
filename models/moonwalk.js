@@ -33,7 +33,7 @@ module.exports.generateDraftMoonwalk = function(currentUser, callback) {
         created_at: Date.now(),
         completed: false
       });
-      callback(draftMoonwalk, randomStockPerson.photoPath);
+      callback(draftMoonwalk, randomStockPerson.photoPath, randomStockPerson.firstName);
   });
 };
 

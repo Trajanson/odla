@@ -14,6 +14,7 @@ const STOCK_PERSON_IMAGE       = $('#stockPersonImage');
 const FLASHCARD_CONTAINER      = $('.flashcard-container');
 const SOUND_IMAGE_IN_FLASHCARD = $('.flashcard-container .flashcard-audio-image');
 const FLIP_BUTTON              = $('#flip-button');
+const TIME_ELAPSED             = $('#moonwalk-time-elapsed');
 
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
@@ -45,7 +46,25 @@ $( document ).ready(function() {
       personStatementAudio.play();
     });
 
+
+
+    provideWarningAboutLeavingPageBeforeSubmittingMoonwalk();
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function sizeDivElements() {
   sizeImageWithinContainer();
@@ -120,12 +139,89 @@ function sizeImageWithinContainer(){
 
 };
 
+function warningMessageText() {
+  return (`Your moonwalk will not be stored until you click to confirm that you have memorized ${stockPersonFirstName}'s message.\n\nAre you sure that you want to leave?`);
+};
+
+function sendWarningMessage() {
+  removeWarningAboutLeavingPage();
+  return confirm(warningMessageText());
+};
+
+function provideWarningAboutLeavingPageBeforeSubmittingMoonwalk() {
+  $("a").on("click", sendWarningMessage);
+  $(window).bind('beforeunload', warningMessageText);
+};
+
+function removeWarningAboutLeavingPage() {
+  $( "a" ).off("click", sendWarningMessage );
+  $(window).unbind('beforeunload', warningMessageText);
+}
 
 
 
 
 
 
+
+
+
+
+
+
+
+function forceTwoDigits(value) {
+  let string = String(value);
+  if (string.length < 2) {
+    return '0' + string;
+  } else {
+    return string;
+  }
+};
+
+
+function formatElapsedTimeClock(elapsedSeconds) {
+  let remainingMilisecondsToAccountFor = elapsedSeconds,
+      days,
+      hours,
+      minutes,
+      seconds,
+      miliseconds;
+
+      days = Math.floor(remainingMilisecondsToAccountFor / (60 * 60 * 24 * 1000));
+      remainingMilisecondsToAccountFor -= (days * 60 * 60 * 24 * 1000);
+
+      hours = Math.floor(remainingMilisecondsToAccountFor / (60 * 60 * 1000));
+      remainingMilisecondsToAccountFor -= (hours * 60 * 60 * 1000);
+
+      minutes = Math.floor(remainingMilisecondsToAccountFor / (60 * 1000));
+      remainingMilisecondsToAccountFor -= (minutes * 60 * 1000);
+
+
+      seconds = Math.floor(remainingMilisecondsToAccountFor/1000);
+      remainingMilisecondsToAccountFor -= (seconds * 1000);
+
+      miliseconds = Math.floor(remainingMilisecondsToAccountFor/100);
+
+      return forceTwoDigits(days) + " : " +
+             forceTwoDigits(hours) + " : " +
+             forceTwoDigits(minutes) + " : " +
+             forceTwoDigits(seconds) + " : " +
+             forceTwoDigits(miliseconds);
+
+};
+
+function updateElapsedTime() {
+  let newElapsedTimeSeconds = (Date.now() - draftMoonwalk.created_at),
+      formattedTime         = formatElapsedTimeClock(newElapsedTimeSeconds);
+  TIME_ELAPSED.text(formattedTime);
+};
+
+
+
+function setClockOnElapsedTime() {
+  intervalID = window.setInterval(updateElapsedTime, 100);
+};
 
 
 
@@ -143,6 +239,7 @@ function handleFlipButtonClick() {
 
   console.log(draftMoonwalk);
 
+  draftMoonwalk.created_at = Date.now();
   $.ajax({
     type: "POST",
     url: "/api/moonwalk/create",
@@ -151,5 +248,9 @@ function handleFlipButtonClick() {
       console.log(data);
     }
   });
+
+  removeWarningAboutLeavingPage();
+
+  setClockOnElapsedTime();
 
 };
