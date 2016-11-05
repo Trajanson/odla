@@ -1,0 +1,45 @@
+<link rel="stylesheet" href="/css/moonwalkingFlashcard.css" />
+
+<script>
+  let moonwalk = {
+    stockPerson: "{{moonwalk.stockPerson}}",
+    user:        "{{moonwalk.user}}",
+    created_at:  "{{moonwalk.created_at}}",
+    completed:   "{{moonwalk.completed}}",
+    personStatement: "{{moonwalk.personStatement}}",
+    voice: "{{moonwalk.voice}}",
+    imageURL: "{{moonwalk.imageURL}}",
+    stockPersonFirstName: "{{moonwalk.stockPersonFirstName}}",
+    phoneNumber:  "{{moonwalk.phoneNumber}}"
+  };
+  let stockPersonPhotoPath = "{{stockPersonPhotoPath}}";
+  let personStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${moonwalk.personStatement}&voice=${moonwalk.voice}`);
+  let stockPersonFirstName = "{{stockPersonFirstName}}";
+</script>
+<script src="/js/testMoonwalk.js" defer="defer"></script>
+
+
+<div id="flashcard" class="flashcard-container flip-container">
+    <div class="flipper">
+
+      <div class="front-of-flashcard">
+
+        <div id="image-container" >
+          <img id="stockPersonImage" />
+        </div>
+
+        <form>
+          <input id="attempted-moonwalk-answer" type="text" />
+        </form>
+
+        <button id="check-answer-button">Check!</button>
+
+      </div>
+
+      <div class="back-of-flashcard">
+        <img class="flashcard-audio-image" src="/images/audioPurple.png" />
+
+      </div>
+
+    </div>
+  </div>

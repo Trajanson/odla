@@ -9,7 +9,6 @@ router.post('/create', ensureAuthenticated, function(req, res) {
   let newMoonwalk = new Moonwalk(req.body),
       callback    = function(err, moonwalk) {
           if (err) throw err;
-        // console.log(moonwalk);
   };
 
   Moonwalk.createMoonwalk(newMoonwalk, callback);

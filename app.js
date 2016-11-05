@@ -22,8 +22,10 @@ var Moonwalk = require('./models/moonwalk');
 var dashboard          = require('./routes/dashboard');
 var users              = require('./routes/users');
 var moonwalk           = require('./routes/moonwalk');
+var imageRepresentations = require('./routes/settings/imageRepresentations');
 var audioGenerationAPI = require('./routes/api/audioGenerationAPI');
-var moonwalkAPI = require('./routes/api/moonwalkAPI');
+var moonwalkAPI        = require('./routes/api/moonwalkAPI');
+var storeImageAssociationsAPI = require('./routes/api/storeImageAssociationsAPI');
 
 // Init App
 var app = express();
@@ -81,7 +83,7 @@ app.use(function(req, res, next) {
     res.locals.moonwalksInProgress = moonwalksInProgress;
     next();
   }
-  
+
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg   = req.flash('error_msg');
   res.locals.error       = req.flash('error');
@@ -114,6 +116,8 @@ app.use('/users', users);
 app.use('/moonwalk', moonwalk);
 app.use('/api/audioGenerationAPI', audioGenerationAPI);
 app.use('/api/moonwalk', moonwalkAPI);
+app.use('/api/storeImageAssociations', storeImageAssociationsAPI);
+app.use('/settings/imageRepresentations', imageRepresentations);
 
 // Set Port
 app.set('port', (process.env.PORT || 3000));

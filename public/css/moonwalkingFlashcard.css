@@ -118,13 +118,30 @@
   z-index: 1;
 }
 
+#repeat-audio-button{
+  position: absolute;
+  bottom: 68%;
+  left: 46%;
+  font-size: 144%;
+}
 
+#flip-button-container{
+  position: absolute;
+  bottom: 29%;
+  left: 46%;
+  font-size: 144%;
+}
 
+#visualization-request-button {
+  left: 46%;
+  position: relative;
+  bottom: -89%;
+}
 
 .flashcard-audio-image {
   position: absolute;
-  right: 1.5%;
-  bottom: 1.5%;
+  right: 10.5%;
+  bottom: 43.5%;
 }
 
 .flashcard-text {
@@ -176,4 +193,33 @@
   border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
   border: solid 7px #41403E;
   overflow: hidden;
+}
+
+#rear-flashcard-text {
+  width: 90%;
+  right: -5%;
+  position: relative;
+  top: 13%;
+  text-align: center;
+}
+
+#moonwalk-time-elapsed {
+  right: -33%;
+  position: relative;
+  top: 43%;
+  font-size: 123%;
+  color: #865d20;
+}
+
+
+#visualization-container {
+  height: 100%;
+  width: 100%;
+  background: rgba(236,191,203,0.9);
+  position: fixed;
+  left: 0%;
+  top: 0%;
+  padding: 0;
+  margin: 0;
+  z-index: 100;
 }

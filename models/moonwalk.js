@@ -24,8 +24,9 @@ module.exports.generateDraftMoonwalk = function(currentUser, callback) {
 
   StockPerson.retrieveRandomStockPerson(function(randomStockPerson) {
       let voice             = selectVoice(randomStockPerson.gender),
-          randomPhoneNumber = generateRandomPhoneNumber(),
-          statement         = generateStatement(randomPhoneNumber);
+      randomPhoneNumber = generateRandomPhoneNumber(),
+      statement         = generateStatement(randomPhoneNumber);
+
       let draftMoonwalk = new Moonwalk({
         stockPerson: randomStockPerson._id,
         stockPersonFirstName: randomStockPerson.firstName,

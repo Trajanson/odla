@@ -11,6 +11,7 @@
   "author": "Julian Theoderik Trajanson",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.6.12",
     "bcryptjs": "*",
     "body-parser": "^1.15.2",
     "connect-flash": "*",
@@ -23,9 +24,12 @@
     "mongodb": "*",
     "mongoose": "*",
     "mongoose-random": "^0.1.1",
+    "multer": "^1.2.0",
+    "multer-s3": "^2.3.2",
     "passport": "*",
     "passport-http": "*",
     "passport-local": "*",
+    "s3-uploader": "^2.0.2",
     "url": "^0.11.0",
     "watson-developer-cloud": "^2.6.2"
   },

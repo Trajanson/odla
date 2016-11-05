@@ -1,10 +1,7 @@
 // SETTINGS //////////////////////////////////////
 //////////////////////////////////////////////////
 
-// Flashcard Audio Image
-const FLASHCARD_SOUND_IMAGE_HEIGHT_RATIO_TO_CONTAINER = 0.2;
-const FLASHCARD_SOUND_IMAGE_WIDTH_RATIO_TO_CONTAINER  = 0.13;
-
+const TIME_BETWEEN_NUMBER_VISUALIZATIONS = 1500;
 
 // DIV Elements
 const FLASHCARD                = $('#flashcard');
@@ -12,7 +9,13 @@ const IMAGE_CONTAINER          = $('#image-container');
 const STOCK_PERSON_IMAGE       = $('#stockPersonImage');
 
 const FLASHCARD_CONTAINER      = $('.flashcard-container');
-const SOUND_IMAGE_IN_FLASHCARD = $('.flashcard-container .flashcard-audio-image');
+
+const REPLAY_AUDIO_BUTTON      = $('#repeat-audio-button');
+
+const VISUALIZATION_REQUEST_BUTTON = $('#visualization-request-button');
+const VISUALIZATION_CONTAINER = $('#visualization-container');
+const VISUALIZATION_IMAGE      = $('#number-visualization-image');
+
 const FLIP_BUTTON              = $('#flip-button');
 const TIME_ELAPSED             = $('#moonwalk-time-elapsed');
 
@@ -20,6 +23,8 @@ const TIME_ELAPSED             = $('#moonwalk-time-elapsed');
 //////////////////////////////////////////////////
 
 
+let insertedText = `Sure. No problem ${username}. `;
+let repeatedPersonStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${insertedText}${draftMoonwalk.personStatement}&voice=${draftMoonwalk.voice}`);
 
 
 
@@ -41,10 +46,18 @@ $( document ).ready(function() {
     });
 
 
+
     FLIP_BUTTON.on('click', handleFlipButtonClick);
-    SOUND_IMAGE_IN_FLASHCARD.on('click', function() {
-      personStatementAudio.play();
+    REPLAY_AUDIO_BUTTON.on('click', function() {
+
+
+      repeatedPersonStatementAudio.play();
+
+      personStatementAudio.pause();
     });
+
+    VISUALIZATION_REQUEST_BUTTON.on('click', visualizeMoonwalk);
+
 
 
 
@@ -59,6 +72,47 @@ $( document ).ready(function() {
 
 
 
+function visualizeMoonwalk() {
+  let phoneNumberDigits = draftMoonwalk.phoneNumber.split(''),
+      numberImages = userNumberRepresentations.slice();
+
+      personStatementAudio.pause();
+      repeatedPersonStatementAudio.pause();
+
+
+  VISUALIZATION_CONTAINER.show();
+
+
+  function showNextDigit(remainingDigits, numberImages) {
+    if (remainingDigits.length === 0) {
+      window.setTimeout(function() {
+        VISUALIZATION_CONTAINER.hide();
+      }, TIME_BETWEEN_NUMBER_VISUALIZATIONS)
+      return;
+    } else {
+      let nextDigitAsText = remainingDigits.shift(),
+          currentDigitAsNumber = parseInt(nextDigitAsText);
+
+      let digitAudio = new Audio(`/api/audioGenerationAPI/?text=${nextDigitAsText}&voice=${draftMoonwalk.voice}`);
+
+      digitAudio.play();
+
+      VISUALIZATION_IMAGE.attr('src', numberImages[currentDigitAsNumber]);
+
+
+      window.setTimeout(function() {
+        showNextDigit(remainingDigits, numberImages);
+      }, TIME_BETWEEN_NUMBER_VISUALIZATIONS);
+    }
+  };
+
+  showNextDigit(phoneNumberDigits, numberImages);
+};
+
+
+
+
+
 
 
 
@@ -68,25 +122,9 @@ $( document ).ready(function() {
 
 function sizeDivElements() {
   sizeImageWithinContainer();
-  fitSoundImageInFlashcard();
 };
 
 
-function fitSoundImageInFlashcard () {
-  var containerHeight  = FLASHCARD_CONTAINER.height(),
-      containerWidth   = FLASHCARD_CONTAINER.width();
-
-  var soundImageHeight = containerHeight * FLASHCARD_SOUND_IMAGE_HEIGHT_RATIO_TO_CONTAINER,
-      soundImageWidth = containerWidth * FLASHCARD_SOUND_IMAGE_WIDTH_RATIO_TO_CONTAINER;
-
-  SOUND_IMAGE_IN_FLASHCARD.css({
-    'min-height': soundImageHeight,
-    'max-height': soundImageHeight,
-    'min-width': soundImageWidth,
-    'max-width': soundImageWidth,
-
-  });
-}
 
 
 

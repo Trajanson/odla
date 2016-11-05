@@ -20,6 +20,10 @@
   </head>
   <body>
 
+    <div id="visualization-container">
+      <img id="number-visualization-image" />
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar navbar-default navbar-fixed-top header-navbar">
           <div class="container">
@@ -36,22 +40,24 @@
 
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="#contact">Contact</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="#contact">About Odla</a></li>
+                <li><a href="http://www.trajanson.com/">About The Developer</a></li>
+                {{#if user}}
+                <li class="active"><a href="/">Dashboard</a></li>
+                {{/if}}
               </ul>
 
 
 
               <ul class="nav navbar-nav navbar-right">
                 {{#if user}}
-                  <li><a href="/">Dashboard</a></li>
                   <li><a href="/moonwalk">Daily Moonwalk</a></li>
 
                   {{#if moonwalksInProgress.length}}
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Moonwalks In Progress<span class="caret"></span></a>
                       <ul class="dropdown-menu moonwalk-list">
-                        <li>Test Your Memory</li>
+                        <li class="dropdown-header">Test Your Memory</li>
                         <li role="separator" class="divider"></li>
 
                         {{#each moonwalksInProgress}}
@@ -73,13 +79,12 @@
                     <ul class="dropdown-menu">
                       <li><a href="/users/logout">Logout</a></li>
                       <li role="separator" class="divider"></li>
-
+                      <li class="dropdown-header">Settings</li>
+                      <li><a href="/settings/imageRepresentations">Image Representations</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                      <li role="separator" class="divider"></li>
                       <li><a href="#">Another action</a></li>
                       <li><a href="#">Something else here</a></li>
-                      <li role="separator" class="divider"></li>
-                      <li class="dropdown-header">Nav header</li>
-                      <li><a href="#">Separated link</a></li>
-                      <li><a href="#">One more separated link</a></li>
                     </ul>
                   </li>
                 {{else}}

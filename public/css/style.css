@@ -74,3 +74,16 @@ body {
   top: -55px;
   left: 78px;
 }
+
+#visualization-container {
+  display: none;
+}
+
+#number-visualization-image{
+  max-height: 50%;
+  max-width: 50%;
+  position: absolute;
+  left: 50%;
+  top:  50%;
+  transform: translate(-50%, -50%);
+}

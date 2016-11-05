@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="/css/imageRepresentationSettings.css" />
+
+
+
+<div class-"explanation-of-image-representation-settings">
+In the book Moonwalking with Einstein, each number is associated with an image that makes it easy to remember.
+</div>
+
+{{#each userNumberRepresentations}}
+
+
+  <div class="number-representation-block">
+    <div id="flashcard" class="flashcard-container flip-container">
+      <div class="flipper">
+
+        <div class="front-of-flashcard">
+
+          <div class="number-representation-image-container">
+            <img id="number-representation-image-{{@index}}" class="number-representation-image" src="{{this}}" />
+          </div>
+
+          <div class="number-display-container">
+            This character represents the number<br/>
+            <span class="number-display">{{@index}}</span>
+          </div>
+
+
+          <form id="replace-image-representation-form-{{@index}}" class="replace-image-representation-form" method="post" action="/api/storeImageAssociations?number={{@index}}" enctype="multipart/form-data">
+            <input id="upload-box-{{@index}}" type="file" name="uploadedPicture" accept="image/*">
+            <input id="upload-submit-button-{{@index}}" type="submit" value="Use a different image">
+          </form>
+
+        </div>
+
+        <div class="back-of-flashcard">
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+{{/each}}
+
+
+
+
+
+<script src="/js/imageRepresentationSettings.js" defer="defer"></script>
