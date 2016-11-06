@@ -4,6 +4,23 @@ var mongoose         = require('mongoose');
 mongoose.connect(DatabaseConfiguration.PATH);
 var db = mongoose.connection;
 var StockPerson = require('./../models/stockPerson');
+var User        = require('./../models/user');
+
+
+
+let guestUser = new User({
+  username: 'Guest User',
+  password: "f8acd5eec2c7ae55399954ac5d",
+  email: 'guest@guest.com',
+  name: 'Guest User',
+});
+
+User.createUser(guestUser, function(err, guestUser) {
+  if (err) throw err;
+  console.log(guestUser);
+  createMaleStockPeople();
+});
+
 
 
 
@@ -322,35 +339,54 @@ function selectRandomFrom(arr) {
 
 
 
+function createMaleStockPeople() {
+  let creationCount = 0,
+      numberOfMales = MaleStockPhotoURLs.length;
 
+  MaleStockPhotoURLs.forEach(function(photo_url, index) {
+    let newStockPerson = new StockPerson({
+      firstName: selectRandomFrom(MaleFirstNames),
+      photoPath: photo_url,
+      gender: 'M',
+    });
 
+    StockPerson.createStockPerson(newStockPerson,function(err, stockPerson) {
+      if (err) throw err;
+      console.log(stockPerson);
 
-
-MaleStockPhotoURLs.forEach(function(photo_url, index) {
-  let newStockPerson = new StockPerson({
-    firstName: selectRandomFrom(MaleFirstNames),
-    photoPath: photo_url,
-    gender: 'M',
+      creationCount += 1;
+      if (creationCount === numberOfMales) {
+        createFemaleStockPeople();
+      }
+    });
   });
+}
 
-  StockPerson.createStockPerson(newStockPerson,function(err, stockPerson) {
-    if (err) throw err;
-    console.log(stockPerson);
+
+
+function createMaleStockPeople() {
+  let creationCount = 0,
+      numberOfFemales = FemaleStockPhotoURLs.length;
+
+
+  FemaleStockPhotoURLs.forEach(function(photo_url, index) {
+    let newStockPerson = new StockPerson({
+      firstName: selectRandomFrom(FemaleFirstNames),
+      photoPath: photo_url,
+      gender: 'F',
+    });
+
+    StockPerson.createStockPerson(newStockPerson,function(err, stockPerson) {
+      if (err) throw err;
+      console.log(stockPerson);
+      creationCount += 1;
+      if (creationCount === numberOfFemales) {
+        endConnection();
+      }
+
+    });
   });
-});
-
-FemaleStockPhotoURLs.forEach(function(photo_url, index) {
-  let newStockPerson = new StockPerson({
-    firstName: selectRandomFrom(FemaleFirstNames),
-    photoPath: photo_url,
-    gender: 'F',
-  });
-
-  StockPerson.createStockPerson(newStockPerson,function(err, stockPerson) {
-    if (err) throw err;
-    console.log(stockPerson);
-  });
-});
+};
 
 
 
@@ -358,14 +394,13 @@ FemaleStockPhotoURLs.forEach(function(photo_url, index) {
 
 
 
-
-(function endConnection() {
+function endConnection() {
   db.close(function(){
     process.on('exit', function (){
       console.log('Seeding successful.');
     });
   })
-})();
+};
 
 
 
