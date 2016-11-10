@@ -5,6 +5,8 @@ var url              = require('url');
 var Moonwalk = require('./../../models/moonwalk');
 var User = require('./../../models/user');
 
+var Settings = require('./../../config/settings');
+
 module.exports = router;
 
 router.post('/create', ensureAuthenticated, function(req, res) {
@@ -37,6 +39,12 @@ router.post('/submitCompletedMoonwalk', ensureAuthenticated, function(req, res) 
       User.findById(currentUser.id, function(err, userDocument) {
 
         console.log(userDocument);
+
+        console.log("Settings.maxPointsForWinningMoonwalk", Settings.maxPointsForWinningMoonwalk);
+
+        if(params.isCorrect) {
+          userDocument.score += Settings.maxPointsForWinningMoonwalk;
+        }
 
         userDocument.save(function(err) {
           res.sendStatus(200);

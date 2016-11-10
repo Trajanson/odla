@@ -16,6 +16,9 @@ var UserSchema = mongoose.Schema({
 	name: {
 		type:  String
 	},
+  score: {
+    type: Number
+  },
   numberRepresentations: [String]
 });
 
@@ -25,6 +28,7 @@ module.exports.createUser = function(newUser, callback){
 	bcrypt.genSalt(10, function(err, salt) {
 	    bcrypt.hash(newUser.password, salt, function(err, hash) {
 
+          newUser.score = 0;
           newUser.numberRepresentations = getArrayOfCelebrityPhotos(10);
 
 	        newUser.password = hash;
