@@ -10,8 +10,12 @@
     voice: "{{moonwalk.voice}}",
     imageURL: "{{moonwalk.imageURL}}",
     stockPersonFirstName: "{{moonwalk.stockPersonFirstName}}",
-    phoneNumber:  "{{moonwalk.phoneNumber}}"
+    phoneNumber:  "{{moonwalk.phoneNumber}}",
+    moonwalkId: "{{moonwalk._id}}"
   };
+
+  console.log(moonwalk.moonwalkId);
+
   let stockPersonPhotoPath = "{{stockPersonPhotoPath}}";
   let personStatementAudio = new Audio(`/api/audioGenerationAPI/?text=${moonwalk.personStatement}&voice=${moonwalk.voice}`);
   let stockPersonFirstName = "{{stockPersonFirstName}}";
@@ -24,21 +28,28 @@
 
       <div class="front-of-flashcard">
 
-        <div id="image-container" >
-          <img id="stockPersonImage" />
+        <div id="get-answer-prompt">
+          Do you remember {{moonwalk.stockPersonFirstName}}'s phone number?
         </div>
 
-        <form>
-          <input id="attempted-moonwalk-answer" type="text" />
+        <div id="image-container" >
+          <img id="stock-person-image" src="{{stockPersonPhotoPath}}" />
+        </div>
+
+        <form id="check-phone-number-form">
+          <input id="attempted-moonwalk-answer" type="text" placeholder="Of course..."/>
+          <br/>
+          <button id="check-answer-button" type="submit" value"test">Submit
+          </button>
         </form>
 
-        <button id="check-answer-button">Check!</button>
 
       </div>
 
       <div class="back-of-flashcard">
-        <img class="flashcard-audio-image" src="/images/audioPurple.png" />
-
+        <div id="answer-response-text">
+          Great job! You got it right.
+        </div>
       </div>
 
     </div>

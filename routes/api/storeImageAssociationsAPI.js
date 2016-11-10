@@ -86,49 +86,6 @@ module.exports = router;
 
 
 
-
-// router.post('/', ensureAuthenticated, upload.array('upl'), function(req, res) {
-//   res.send("Uploaded!");
-//
-//   // var s3Bucket = new AWS.S3( { params: {Bucket: 'odla'} } )
-//
-//   // let imageFile = req.body.uploadedPicture;
-//
-//   // console.log(imageFile);
-//
-//   // console.log(req.files);
-//
-//   // var data = {Key: "user\ photos/randomText.jpg", Body: imageFile};
-//   // s3Bucket.putObject(data, function(err, data){
-//   //   if (err)
-//   //     { console.log('Error uploading data: ', data);
-//   //     console.log(err);
-//   //     } else {
-//   //       console.log('Succesfully uploaded the image!');
-//   //     }
-//   // });
-//
-//
-//   // console.log("req.body.uploadedPicture", req.body.uploadedPicture);
-//
-//   // var query = url.parse(req.url, true).query;
-//   // var params = {
-//   //   number: query.number,
-//   //   voice: query.voice,
-//   //   accept: 'audio/wav'
-//   // };
-//
-//
-//
-//
-//   // let current_user = req.user;
-//
-//
-//
-// });
-
-
-
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

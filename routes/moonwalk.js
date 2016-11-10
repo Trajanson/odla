@@ -31,11 +31,12 @@ router.get('/test', ensureAuthenticated, function(req, res) {
           res.render('error', {});
         } else { 
           let callback = function(error, stockPerson) {
+
             if (error || !stockPerson) {
               res.render('error', {});
             } else { 
               res.render('testMoonwalk', {moonwalk: moonwalk,
-                                          stockPersonPhotoPath: stockPerson.imageURL,
+                                          stockPersonPhotoPath: stockPerson.photoPath,
                                           stockPersonFirstName: stockPerson.firstName
                                         });
             }
