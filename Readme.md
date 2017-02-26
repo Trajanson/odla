@@ -2,7 +2,7 @@
 
 [Odla][odla] is an accompaniment to Joshua Foer's New York Times bestselling Moonwalking with Einstein.
 
-Learn and play at [odla.rocks][odla]
+Learn and play at [odla.rocks][odla].
 
 #### Instructions
 Odla is easy to use! Simply login and click "Daily Moonwalk" to access and you memorize your day's telephone number. If you don't remember or would like to change the image that matches to each number, click on your name in the top-right and select "Image Representations" under Settings.
@@ -41,7 +41,7 @@ The `multer and `multerS3` libraries were used to store the image on Amazon's S3
 
 
 
-[jounce]: http://www.odla.rocks/
+[odla]: http://www.odla.rocks/
 
 [uploadCode]: ./docs/imageUploadCode.png
 
